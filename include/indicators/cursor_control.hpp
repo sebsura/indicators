@@ -18,7 +18,7 @@ namespace indicators {
 #if defined(_MSC_VER)
 
 static inline void show_console_cursor(bool const show, TerminalHandle hndl = TerminalHandle::StdOut) {
-  HANDLE out = os_handle(hndl);
+  HANDLE out = GetStdHandle(os_handle(hndl));
 
   CONSOLE_CURSOR_INFO cursorInfo;
 
@@ -28,7 +28,7 @@ static inline void show_console_cursor(bool const show, TerminalHandle hndl = Te
 }
 
 static inline void erase_line(TerminalHandle hndl = TerminalHandle::StdOut) {
-  auto hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+  auto hStdout = GetStdHandle(os_handle(hndl));
   if (!hStdout)
     return;
 
